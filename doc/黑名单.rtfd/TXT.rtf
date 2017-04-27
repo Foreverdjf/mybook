@@ -1,0 +1,106 @@
+{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf820
+{\fonttbl\f0\fnil\fcharset134 HiraginoSansGB-W3;\f1\froman\fcharset0 Times-Roman;\f2\fmodern\fcharset0 CourierNewPSMT;
+}
+{\colortbl;\red255\green255\blue255;\red83\green83\blue83;\red0\green0\blue0;\red159\green159\blue159;
+\red234\green234\blue234;\red10\green82\blue135;\red153\green100\blue4;\red0\green0\blue255;\red251\green0\blue129;
+}
+{\*\expandedcolortbl;;\cssrgb\c40000\c40000\c40000;\cssrgb\c0\c0\c0;\cssrgb\c68627\c68627\c68627;
+\cssrgb\c93333\c93333\c93333;\cssrgb\c0\c40000\c60000;\cssrgb\c66667\c46667\c0;\cssrgb\c0\c0\c100000;\cssrgb\c100000\c7843\c57647;
+}
+\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl600\sa298\partightenfactor0
+
+\f0\b\fs40 \cf2 \expnd0\expndtw0\kerning0
+\'ba\'da\'c3\'fb\'b5\'a5\'b9\'fd\'c2\'cb
+\f1\fs36 \cf3 \
+
+\itap1\trowd \taflags5 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt\clvertalbase \clshdrawnil \clwWidth7410\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf5 \clbrdrl\brdrs\brdrw20\brdrcf5 \clbrdrb\brdrs\brdrw20\brdrcf5 \clbrdrr\brdrs\brdrw20\brdrcf5 \clpadt200 \clpadl200 \clpadb200 \clpadr200 \gaph\cellx4320
+\clvertalt\clvertalbase \clshdrawnil \clwWidth7410\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf5 \clbrdrl\brdrs\brdrw20\brdrcf5 \clbrdrb\brdrs\brdrw20\brdrcf5 \clbrdrr\brdrs\brdrw20\brdrcf5 \clpadt200 \clpadl200 \clpadb200 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl280\qr\partightenfactor0
+
+\f2\b0\fs24 \cf4 1\
+2\
+3\
+4\
+5\
+6\
+7\
+8\
+9\
+10\
+11\
+12\
+13\
+14\
+15\
+16\
+17\
+18\
+19\
+20\
+21\
+22\
+23\
+24\
+25\
+26\
+27\
+28\
+29\
+30\
+31\cell 
+\pard\intbl\itap1\pardeftab720\sl280\partightenfactor0
+\cf6 function\cf3  is_spam(\cf7 $text\cf3 , \cf7 $file\cf3 , \cf7 $split\cf3  = \cf8 ':'\cf3 , \cf7 $regex\cf3  = false)\{ \
+\'a0\'a0\'a0\'a0\cf7 $handle\cf3  = \cf9 fopen\cf3 (\cf7 $file\cf3 , \cf8 'rb'\cf3 ); \
+\'a0\'a0\'a0\'a0\cf7 $contents\cf3  = \cf9 fread\cf3 (\cf7 $handle\cf3 , \cf9 filesize\cf3 (\cf7 $file\cf3 )); \
+\'a0\'a0\'a0\'a0fclose(\cf7 $handle\cf3 );\
+\'a0\'a0\'a0\'a0\cf7 $lines\cf3  = \cf9 explode\cf3 (\cf8 "n"\cf3 , \cf7 $contents\cf3 ); \
+\'a0\'a0\'a0\'a0\cf7 $arr\cf3  = \cf6 array\cf3 (); \
+\'a0\'a0\'a0\'a0\cf6 foreach\cf3 (\cf7 $lines\cf3  \cf6 as\cf3  \cf7 $line\cf3 )\{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0list(\cf7 $word\cf3 , \cf7 $count\cf3 ) = \cf9 explode\cf3 (\cf7 $split\cf3 , \cf7 $line\cf3 ); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf6 if\cf3 (\cf7 $regex\cf3 )\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf7 $arr\cf3 [\cf7 $word\cf3 ] = \cf7 $count\cf3 ; \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf6 else\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf7 $arr\cf3 [preg_quote(\cf7 $word\cf3 )] = \cf7 $count\cf3 ; \
+\'a0\'a0\'a0\'a0\}\
+\'a0\'a0\'a0\'a0preg_match_all(\cf8 "~"\cf3 .implode(\cf8 '|'\cf3 , \cf9 array_keys\cf3 (\cf7 $arr\cf3 )).\cf8 "~"\cf3 , \cf7 $text\cf3 , \cf7 $matches\cf3 ); \
+\'a0\'a0\'a0\'a0\cf7 $temp\cf3  = \cf6 array\cf3 (); \
+\'a0\'a0\'a0\'a0\cf6 foreach\cf3 (\cf7 $matches\cf3 [0] \cf6 as\cf3  \cf7 $match\cf3 )\{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf6 if\cf3 (!in_array(\cf7 $match\cf3 , \cf7 $temp\cf3 ))\{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf7 $temp\cf3 [\cf7 $match\cf3 ] = \cf7 $temp\cf3 [\cf7 $match\cf3 ] + 1; \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf6 if\cf3 (\cf7 $temp\cf3 [\cf7 $match\cf3 ] >= \cf7 $arr\cf3 [\cf7 $word\cf3 ]) \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf6 return\cf3  true; \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\}\
+\'a0\'a0\'a0\'a0\}\
+\'a0\'a0\'a0\'a0\cf6 return\cf3  false; \
+\}\
+\'a0\
+\cf7 $file\cf3  = \cf8 'spam.txt'\cf3 ; \
+\cf7 $str\cf3  = \cf8 'This string has cat, dog word'\cf3 ; \
+\cf6 if\cf3 (is_spam(\cf7 $str\cf3 , \cf7 $file\cf3 )) \
+\'a0\'a0\'a0\'a0\cf9 echo\cf3  \cf8 'this is spam'\cf3 ; \
+\cf6 else\cf3 \
+\'a0\'a0\'a0\'a0\cf9 echo\cf3  \cf8 'this is not spam'\cf3 ; \cell \lastrow\row
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f0\fs28 \cf2 \'ca\'e4\'b3\'f6\'a3\'ba
+\f1\fs24 \cf3 \
+\
+
+\itap1\trowd \taflags5 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt\clvertalbase \clshdrawnil \clwWidth7410\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf5 \clbrdrl\brdrs\brdrw20\brdrcf5 \clbrdrb\brdrs\brdrw20\brdrcf5 \clbrdrr\brdrs\brdrw20\brdrcf5 \clpadt200 \clpadl200 \clpadb200 \clpadr200 \gaph\cellx4320
+\clvertalt\clvertalbase \clshdrawnil \clwWidth7410\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf5 \clbrdrl\brdrs\brdrw20\brdrcf5 \clbrdrb\brdrs\brdrw20\brdrcf5 \clbrdrr\brdrs\brdrw20\brdrcf5 \clpadt200 \clpadl200 \clpadb200 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl280\qr\partightenfactor0
+
+\f2 \cf4 1\
+2\
+3\
+4\cell 
+\pard\intbl\itap1\pardeftab720\sl280\partightenfactor0
+\cf3 ab:3\
+dog:3\
+cat:2\
+monkey:2\cell \lastrow\row
+}

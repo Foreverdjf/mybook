@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf820
+{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset134 STSongti-SC-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+/************************************************************** \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0* \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0
+\f1 \'ca\'b9\'d3\'c3\'cc\'d8\'b6\'a8
+\f0 function
+\f1 \'b6\'d4\'ca\'fd\'d7\'e9\'d6\'d0\'cb\'f9\'d3\'d0\'d4\'aa\'cb\'d8\'d7\'f6\'b4\'a6\'c0\'ed
+\f0  \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@param\'a0\'a0string\'a0\'a0&$array\'a0\'a0\'a0\'a0\'a0
+\f1 \'d2\'aa\'b4\'a6\'c0\'ed\'b5\'c4\'d7\'d6\'b7\'fb\'b4\'ae
+\f0  \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@param\'a0\'a0string\'a0\'a0$function\'a0\'a0\'a0
+\f1 \'d2\'aa\'d6\'b4\'d0\'d0\'b5\'c4\'ba\'af\'ca\'fd
+\f0  \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@return boolean $apply_to_keys_also\'a0\'a0\'a0\'a0\'a0
+\f1 \'ca\'c7\'b7\'f1\'d2\'b2\'d3\'a6\'d3\'c3\'b5\'bd
+\f0 key
+\f1 \'c9\'cf
+\f0  \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@access public \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0* \
+\'a0\'a0\'a0\'a0\'a0*************************************************************/ \
+\'a0\'a0\'a0\'a0private static function arrayRecursive(&$array, $function, $apply_to_keys_also = false) \
+\'a0\'a0\'a0\'a0\{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0static $recursive_counter = 0; \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0if (++$recursive_counter > 1000) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0die('possible deep recursion attack'); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0foreach ($array as $key => $value) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0if (is_array($value)) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0self::arrayRecursive($array[$key], $function, $apply_to_keys_also); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} else \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0$array[$key] = $function($value); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} \
+\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0if ($apply_to_keys_also && is_string($key)) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0$new_key = $function($key); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0if ($new_key != $key) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0$array[$new_key] = $array[$key]; \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0unset($array[$key]); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\} \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0$recursive_counter--; \
+\'a0\'a0\'a0\'a0\} \
+\
+\'a0\'a0\'a0\'a0/************************************************************** \
+\'a0\'a0\'a0\'a0\'a0* \
+\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0
+\f1 \'bd\'ab\'ca\'fd\'d7\'e9\'d7\'aa\'bb\'bb\'ce\'aa
+\f0 JSON
+\f1 \'d7\'d6\'b7\'fb\'b4\'ae\'a3\'a8\'bc\'e6\'c8\'dd\'d6\'d0\'ce\'c4\'a3\'a9
+\f0  \
+\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@param\'a0\'a0array\'a0\'a0\'a0$array\'a0\'a0\'a0\'a0\'a0\'a0
+\f1 \'d2\'aa\'d7\'aa\'bb\'bb\'b5\'c4\'ca\'fd\'d7\'e9
+\f0  \
+\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@return string\'a0\'a0\'a0\'a0\'a0\'a0
+\f1 \'d7\'aa\'bb\'bb\'b5\'c3\'b5\'bd\'b5\'c4
+\f0 json
+\f1 \'d7\'d6\'b7\'fb\'b4\'ae
+\f0  \
+\'a0\'a0\'a0\'a0\'a0*\'a0\'a0\'a0\'a0@access public \
+\'a0\'a0\'a0\'a0\'a0* \
+\'a0\'a0\'a0\'a0\'a0*************************************************************/ \
+\'a0\'a0\'a0\'a0private static function JSON($array) \{ \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0self::arrayRecursive($array, 'urlencode', true); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0$json = json_encode($array); \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0return urldecode($json); \
+\'a0\'a0\'a0\'a0\} \
+}
