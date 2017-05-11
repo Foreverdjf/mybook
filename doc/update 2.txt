@@ -1,0 +1,70 @@
+public function newsearch($params)
+    {
+        $query = Goods::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'add_time' => SORT_DESC,
+                ]
+            ],
+            'pagination' => [
+                'pageSize' => \Yii::$app->params['adminPageSize']
+            ]
+        ]);
+        $this->load($params);
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+        $sku_code = $this->sku_code;
+        if (!empty($sku_code)) {
+            $goodsTableName = Goods::tableName();
+            $query->from("$goodsTableName g");
+            $good_id = substr($sku_code, 0, -2);
+            $newgoods = GoodsNew::setTableName($good_id);
+            $query->leftJoin("$newgoods n", "g.goods_id = n.goods_id");
+            $query->andWhere([
+                'n.sku_code' => $sku_code
+            ]);
+        }else{
+
+            $query->andFilterWhere([
+                'model_id' => $this->model_id,
+            ]);
+            $query->andFilterWhere([
+                'goods_id' => $this->goods_id,
+                'is_master' => $this->is_master,
+                'type' => $this->type,
+                'is_closed' => $this->is_closed,
+                'user_id' => $this->user_id,
+                'status' => $this->status,
+                'cate_id' => $this->cate_id,
+                'subcate_id' => $this->subcate_id,
+                'brand_id' => $this->brand_id,
+                'phone_mob' => $this->phone_mob,
+                'delete_code' => $this->delete_code,
+                'delete_userid' => $this->delete_userid,
+            ]);
+            if ($this->goods_name) {
+                $query->andFilterWhere(['like', 'goods_name', $this->goods_name]);
+            }
+            if ($this->user_name) {
+                $userId = Fnuser::getUserIdByName($this->user_name);
+                if ($userId) {
+                    $query->andFilterWhere([
+                        'user_id' => $userId,
+                    ]);
+                } else if (is_numeric($this->user_name)) {
+                    $query->andFilterWhere([
+                        'user_id' => $this->user_name,
+                    ]);
+                }
+            }
+        }
+        //var_dump($query->createCommand()->rawSql);
+        return $dataProvider;
+    }
+$('#button').attr('disabled',"true");添加disabled属性 
+$('#button').removeAttr("disabled"); 移除disabled属性
