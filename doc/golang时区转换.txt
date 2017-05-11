@@ -1,0 +1,19 @@
+时区
+
+golang默认采用UTC，即Unix标准时间。而一般情况下，我们存数据库采用的是中国时间，即CST。
+UTC和CST一般相差8个小时。
+    time := time.Now()
+    // 默认UTC    
+    loc, err := time.LoadLocation("") 
+    // 一般为CST
+    loc, err := time.LoadLocation("Local")
+    // 美国洛杉矶PDT
+    loc, err := time.LoadLocation("America/Los_Angeles")
+    // CST
+    loc, _:= time.LoadLocation("Asia/Chongqing") 
+
+将string类型直接转换成对应时区time
+    loc, err := time.LoadLocation("Local")
+    dt, err := time.ParseInLocation("2006-01-02 15:04:05", "2017-05-11 14:06:06", loc)
+
+$GOROOT/lib/time/zoneinfo.zip 这个文件下可以看到所有时区。
